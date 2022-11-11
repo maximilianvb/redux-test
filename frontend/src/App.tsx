@@ -1,9 +1,37 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { useAppSelector, useAppDispatch } from "./hooks";
+
+interface CounterState {
+  value: number;
+}
+
+const initialState: CounterState = {
+  value: 0,
+};
+
+export const counterSlice = createSlice({
+  name: "counter",
+  initialState,
+  reducers: {
+    increment: (state) => {
+      state.value += 1;
+    },
+    decrement: (state) => {
+      state.value -= 1;
+    },
+    // Use the PayloadAction type to declare the contents of `action.payload`
+    incrementByAmount: (state, action: PayloadAction<number>) => {
+      state.value += action.payload;
+    },
+  },
+});
 
 function App() {
-  const [count, setCount] = useState(0);
+  const count = useAppSelector((state) => state.counter.value);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="App">
@@ -17,7 +45,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={() => dispatch(counterSlice.actions.increment(count))}>
           count is {count}
         </button>
         <p>
