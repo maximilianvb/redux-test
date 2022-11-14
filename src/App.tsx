@@ -45,7 +45,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => dispatch(counterSlice.actions.increment())}>
+        <button onClick={() => dispatch(counterSlice.actions.increment(count))}>
           count is {count}
         </button>
         <p>
