@@ -1,7 +1,7 @@
-export default function handler(request, response) {
-  response.status(200).json({
-    body: request.body,
-    query: request.query,
-    cookies: request.cookies,
-  });
-}
+import type { VercelRequest, VercelResponse } from "@vercel/node";
+
+const handleRequest = async (req: VercelRequest, res: VercelResponse) => {
+  res.send("hello world");
+};
+
+export default handleRequest;
